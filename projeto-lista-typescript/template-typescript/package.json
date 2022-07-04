@@ -1,0 +1,24 @@
+{
+  "name": "template-ts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "exercicio1": "tsc && node ./build/exercicio-1.js",
+    "exercicio2": "tsc && node ./build/exercicio-2.js",
+    "exercicio3": "tsc && node ./build/exercicio-3.js",
+    "exercicio4": "tsc && node ./build/exercicio-4.js",
+    "exercicio5": "tsc && node ./build/exercicio-5.js",
+    "exercicio6": "tsc && node ./build/exercicio-6.js",
+    "exercicio7": "tsc && node ./build/exercicio-7.js",
+    "exercicio8": "tsc && node ./build/exercicio-8.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^18.0.0",
+    "prettier": "2.7.1",
+    "typescript": "^4.7.4"
+  }
+}
