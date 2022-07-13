@@ -8,24 +8,24 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-  
+
 
 //GET Usuários (com busca)
 app.get("/users", async (req: Request, res: Response) => {
   let errorCode = 400;
   try {
-    const busca = req.query.busca as string
+    const busca = req.query.busca as string;
 
     if (busca) {
-      const [ resultado ] = await connection.raw(`
+      const [resultado] = await connection.raw(`
         SELECT * FROM Funcionarios 
         WHERE LOWER(nome) LIKE "%${busca.toLowerCase()}%"
         `)
 
-      return res.status(200).send({ usuários:  resultado });
+      return res.status(200).send({ usuário: resultado });
     }
 
-    const [ resultado ] = await connection.raw(`
+    const [resultado] = await connection.raw(`
     SELECT * FROM Funcionarios;
     `)
 
@@ -40,14 +40,14 @@ app.get("/users", async (req: Request, res: Response) => {
 app.post("/users", async (req: Request, res: Response) => {
   let errorCode = 400;
   try {
-    const { nome, email} = req.body;
+    const { nome, email } = req.body;
 
-    if(!nome || !email) {
+    if (!nome || !email) {
       errorCode = 401
       throw new Error("Nome e email são obrigatórios");
     }
 
-    if(typeof nome !== "string" || typeof email !== "string") {
+    if (typeof nome !== "string" || typeof email !== "string") {
       errorCode = 402
       throw new Error("Nome e email devem ser strings");
     }
@@ -56,17 +56,17 @@ app.post("/users", async (req: Request, res: Response) => {
       throw new Error("Email invalido");
     }
 
-    const checkEmail: Funcionarios [] = await connection.raw(`
+    const [ checkEmail ]: string[] = await connection.raw(`
       SELECT * FROM Funcionarios 
       WHERE email = '${email}'
     `)
 
-    if(checkEmail.length > 0){
+    if (checkEmail[0]) {
       errorCode = 401
       throw new Error("Email já cadastrado")
     }
 
-    if(nome.length < 4) {
+    if (nome.length < 4) {
       errorCode = 401
       throw new Error("Nome deve ter mais de 4 caracteres")
     }
@@ -96,12 +96,12 @@ app.put("/users/:id", async (req: Request, res: Response) => {
     const id = Number(req.params.id);
     const email = req.body.email as string;
 
-    if(!email) {
+    if (!email) {
       errorCode = 401
       throw new Error("Email é obrigatório");
     }
 
-    if(typeof email !== "string") {
+    if (typeof email !== "string") {
       errorCode = 402
       throw new Error("Email deve ser uma string");
     }
@@ -110,38 +110,38 @@ app.put("/users/:id", async (req: Request, res: Response) => {
       throw new Error("Email invalido");
     }
 
-    const [ checkId ]: string[] = await connection.raw(`
+    const [checkId]: string[] = await connection.raw(`
       SELECT * FROM Funcionarios
       WHERE id = ${id}
     `)
 
-    if(checkId.length === 0) {
+    if (checkId.length === 0) {
       errorCode = 403
       throw new Error("Usuário não encontrado")
     }
 
-    const [ checkEmail ]: string[] = await connection.raw(`
+    const [checkEmail]: string[] = await connection.raw(`
       SELECT * FROM Funcionarios
       WHERE email = '${email}'
     `)
 
-    if(checkEmail.length > 0){
+    if (checkEmail.length > 0) {
       errorCode = 401
       throw new Error("Email já cadastrado")
-    } 
+    }
 
     await connection.raw(`
     UPDATE Funcionarios
     SET email = "${email}"
     WHERE id = ${id}
     `)
-    
+
     res.status(200).send({ mensagem: "Email atualizado com sucesso!" });
 
   } catch (error) {
     res.status(errorCode).send({ mensagem: error.message });
   }
-    
+
 })
 
 //DELETE Usuário
@@ -150,16 +150,16 @@ app.delete("/users/:id", async (req: Request, res: Response) => {
   try {
     const id = Number(req.params.id);
 
-    const [ checkId ]: string[] = await connection.raw(`
+    const [checkId]: string[] = await connection.raw(`
       SELECT * FROM Funcionarios
       WHERE id = ${id}
     `)
 
-    if(checkId.length === 0) {
+    if (checkId.length === 0) {
       errorCode = 404
       throw new Error("Usuário não encontrado")
     }
-    
+
     await connection.raw(`
     DELETE FROM Funcionarios
     WHERE id = ${id}`)
