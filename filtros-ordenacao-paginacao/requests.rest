@@ -1,0 +1,47 @@
+### Ping
+GET http://localhost:3003/ping
+
+
+### Get all users (query params: q to search for name or id, sort to sort, order to order, limit to limit, page to set page)
+GET http://localhost:3003/users?sort=role&order=asc
+
+
+### Search users by id or email
+GET http://localhost:3003/users?q=user&sort=role&order=asc
+
+
+### Create user NORMAL
+POST http://localhost:3003/users
+Content-Type: application/json
+{
+    "email": "testenormal@gmail.com",
+    "password": "teste123",
+    "role": "NORMAL"
+}
+
+
+### Create user ADMIN
+POST http://localhost:3003/users
+Content-Type: application/json
+{
+    "email": "testeadmin@gmail.com",
+    "password": "teste123",
+    "role": "ADMIN"
+}
+
+
+### Get all products
+GET http://localhost:3003/products
+
+
+### Search products by name
+GET http://localhost:3003/products?q=celular
+
+
+### Create product
+POST http://localhost:3003/products
+Content-Type: application/json
+{
+    "name": "Test product",
+    "price": 555.55
+}
