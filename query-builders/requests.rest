@@ -1,0 +1,28 @@
+### Ping
+GET http://localhost:3003/ping
+
+### POST Perfume
+POST http://localhost:3003/perfume
+Content-Type: application/json
+
+{
+  "name": "Coraggio",
+  "brand": "Natura",
+  "price": 250,
+  "ml": 150
+}
+
+### GET Perfume
+GET http://localhost:3003/perfume?brand=Giorgio_Armani
+
+### PUT Perfume
+PUT http://localhost:3003/perfume/03
+Content-Type: application/json
+
+{
+  "price": 250
+}
+
+### DELETE Perfume
+DELETE http://localhost:3003/perfume/04
+
