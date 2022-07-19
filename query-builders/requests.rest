@@ -13,7 +13,7 @@ Content-Type: application/json
 }
 
 ### GET Perfume
-GET http://localhost:3003/perfume?q=Coraggio
+GET http://localhost:3003/perfume?brand=Giorgio_Armani
 
 ### PUT Perfume
 PUT http://localhost:3003/perfume/03
