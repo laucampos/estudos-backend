@@ -156,10 +156,10 @@ export class UserController {
                     return user.nickname.includes(`${nickname}`)
                 }
                 )
-                return res.status(200).send({user})
+                return res.status(200).send({ user })
             }
 
-            return res.status(200).send({users})
+            return res.status(200).send({ users })
 
         } catch (error) {
             res.status(errorCode).send({ message: error.message })
@@ -180,37 +180,37 @@ export class UserController {
                 throw new Error("Invalid token")
             }
 
-            if(!nickname && !email && !password) {
+            if (!nickname && !email && !password) {
                 errorCode = 401
                 throw new Error("Missing data, please fill at least one field")
             }
 
-            if(nickname && typeof nickname !== "string" || nickname && nickname.length < 3) {
+            if (nickname && typeof nickname !== "string" || nickname && nickname.length < 3) {
                 errorCode = 401
                 throw new Error("Nickname must be at least 3 characters")
             }
 
-            if(email && typeof email !== "string" || email && !email.includes("@")) {
+            if (email && typeof email !== "string" || email && !email.includes("@")) {
                 errorCode = 401
                 throw new Error("Invalid email")
             }
 
-            if(password && typeof password !== "string" || password && password.length < 6) {
+            if (password && typeof password !== "string" || password && password.length < 6) {
                 errorCode = 401
                 throw new Error("Password must be at least 6 characters")
             }
-            
+
             const userDatabase = new UserDatabase()
             const userEmail = await userDatabase.findByEmail(email)
 
-            if(userEmail) {
+            if (userEmail) {
                 errorCode = 401
                 throw new Error("Email already in use")
             }
 
             const userDB = await userDatabase.updateUser(payload.id, nickname, email, password)
 
-           res.status(200).send({ message: "User updated successfully" })
+            res.status(200).send({ message: "User updated successfully" })
         } catch (error) {
             res.status(errorCode).send({ message: error.message })
         }
@@ -230,26 +230,26 @@ export class UserController {
                 throw new Error("Invalid token")
             }
 
-            if(!id) {
+            if (!id) {
                 errorCode = 401
                 throw new Error("Id must be provided")
             }
 
-            if(id === payload.id) {
+            if (id === payload.id) {
                 errorCode = 401
                 throw new Error("You can't delete yourself")
             }
 
-            
+
 
             const userDatabase = new UserDatabase()
             const userDB = await userDatabase.findById(id)
 
-            if(!userDB) {
+            if (!userDB) {
                 errorCode = 401
                 throw new Error("User not found")
             }
-            
+
             await userDatabase.deleteUser(id)
 
             res.status(200).send({ message: "User deleted successfully" })
@@ -260,4 +260,3 @@ export class UserController {
         }
     }
 }
-
