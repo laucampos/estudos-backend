@@ -1,0 +1,50 @@
+### Endpoint de teste
+GET http://localhost:3003/ping
+
+### Endpoint 1: Signup
+POST http://localhost:3003/signup
+Content-Type: application/json
+
+{
+  "nickname": "lausompac",
+  "email": "lau@gmail.com",
+  "password": "blablabla123"
+}
+
+### Endpoint 2: Login
+POST http://localhost:3003/login
+Content-Type: application/json
+
+{
+  "email": "lau@gmail.com",
+  "password": "blablabla123"
+}
+
+### Endpoint 3: Request users (protected)
+GET http://localhost:3003/users/?nickname=
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImE2YmQwYjUyLWMyZmUtNGRlNS1hM2MzLTQxNjBjODg0YTJhOSIsImlhdCI6MTY1OTM3NTk2MSwiZXhwIjoxNjU5NDYyMzYxfQ.Nbf1q-yooZQ0RbAjdVJyZ2GpFbztqrzngwRbYd3UAMY
+Content-Type: application/json
+
+# {
+#     "email": "lau@gmail.com",
+#     "password": "blablabla123"
+# }
+
+### Endpoint 4: Update user (protected)
+PUT http://localhost:3003/users/
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImE2YmQwYjUyLWMyZmUtNGRlNS1hM2MzLTQxNjBjODg0YTJhOSIsImlhdCI6MTY1OTM3NTk2MSwiZXhwIjoxNjU5NDYyMzYxfQ.Nbf1q-yooZQ0RbAjdVJyZ2GpFbztqrzngwRbYd3UAMY
+Content-Type: application/json
+
+{
+    "email": "lau@gmail.com"
+}
+
+### Endpoint 5: Delete user (protected)
+DELETE http://localhost:3003/users/
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImE2YmQwYjUyLWMyZmUtNGRlNS1hM2MzLTQxNjBjODg0YTJhOSIsImlhdCI6MTY1OTM3NTk2MSwiZXhwIjoxNjU5NDYyMzYxfQ.Nbf1q-yooZQ0RbAjdVJyZ2GpFbztqrzngwRbYd3UAMY
+Content-Type: application/json
+
+{
+    "id":"f03017bb-2c08-4cdc-bb63-7fbd7cebe01f"
+}
+
