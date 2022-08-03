@@ -1,0 +1,40 @@
+### Endpoint de teste
+GET http://localhost:3003/ping
+
+
+### Signup
+POST http://localhost:3003/signup
+Content-Type: application/json
+
+{
+    "nickname": "laudev",
+    "email": "lau@email.com",
+    "password": "lau123"
+}
+
+### Login
+POST http://localhost:3003/login
+Content-Type: application/json
+
+{
+    "email": "lau@email.com",
+    "password": "lau123"
+}
+
+### Get all users (protected)
+GET http://localhost:3003/users?search=
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImI0ZDk2OTBmLWYzMjUtNDFlOS1iMjRlLWY5OTRmYzkxMDQ1MCIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NTk0NjE4MDUsImV4cCI6MTY1OTU0ODIwNX0.ZO6pUWCoUjHXYqD5WqU8C5Gyv1_-ZtEVnPZdw1g0PHM
+
+### Edit user (protected)
+PUT http://localhost:3003/users
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImI0ZDk2OTBmLWYzMjUtNDFlOS1iMjRlLWY5OTRmYzkxMDQ1MCIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NTk0NjE4MDUsImV4cCI6MTY1OTU0ODIwNX0.ZO6pUWCoUjHXYqD5WqU8C5Gyv1_-ZtEVnPZdw1g0PHM
+Content-Type: application/json
+
+{
+    "id": "b4d9690f-f325-41e9-b24e-f994fc910450",
+    "nickname": "lau"
+}
+
+### Delete user (protected)
+DELETE http://localhost:3003/users/96cce702-3b2b-4b29-9213-785699f459f9
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImI0ZDk2OTBmLWYzMjUtNDFlOS1iMjRlLWY5OTRmYzkxMDQ1MCIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NTk0NjE4MDUsImV4cCI6MTY1OTU0ODIwNX0.ZO6pUWCoUjHXYqD5WqU8C5Gyv1_-ZtEVnPZdw1g0PHM
